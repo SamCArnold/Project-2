@@ -1,6 +1,8 @@
 package com.jared.proj2;
 
+import android.content.Intent;
 import android.nfc.Tag;
+import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -9,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.telephony.SmsManager;
+import android.widget.Toast;
+
 import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
 import javax.crypto.Cipher;
@@ -22,6 +27,7 @@ public class Main extends AppCompatActivity {
 
     Button encrypt;
     Button decrypt;
+    Button btSend;
     TextView encryTXT;
     TextView decryTXT;
     EditText message;
@@ -42,6 +48,7 @@ public class Main extends AppCompatActivity {
 
         encrypt = (Button) findViewById(R.id.encrpyt);
         decrypt = (Button) findViewById(R.id.decrypt);
+        btSend = (Button) findViewById(R.id.btSend);
         encryTXT = (TextView) findViewById(R.id.encrypt_msg);
         decryTXT = (TextView) findViewById(R.id.decrypt_msg);
         message = (EditText) findViewById(R.id.message);
@@ -58,6 +65,24 @@ public class Main extends AppCompatActivity {
             e.printStackTrace();
             Log.e(TAG, "AES Key Error");
         }
+    }
+
+    protected void sendEncryptedSMS(View v){
+        String toPhoneNumber = getResources().getString(R.string.text_phoneNumber);
+        String encryptedMessage = encryTXT.getText().toString();
+
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(toPhoneNumber, null, encryptedMessage, null, null);
+            Toast.makeText(getApplicationContext(), "Encrypted SMS sent.",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Sending Encrypted SMS failed.",
+                    Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
+        backToList(v);
     }
 
     /**
@@ -110,6 +135,13 @@ public class Main extends AppCompatActivity {
                 Log.e(TAG, "Error decrypting");
             }
             decryTXT.setText("[DECRYPTED]:\n" + new String(decryptedData) + "\n");
+        } else if (v == btSend){
+            sendEncryptedSMS(v);
         }
+    }
+
+    public void backToList(View v){
+        Intent intent = new Intent(this, MessageList.class);
+        startActivity(intent);
     }
 }
