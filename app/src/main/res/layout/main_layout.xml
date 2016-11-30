@@ -14,10 +14,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/message"
         android:hint="Type the message you want to encrypt"
+        android:layout_below="@+id/etPhoneNumber"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/decrypt"
-        android:layout_alignEnd="@+id/decrypt" />
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -67,5 +66,19 @@
         android:layout_alignBottom="@+id/encrpyt"
         android:layout_centerHorizontal="true"
         android:layout_alignTop="@+id/encrpyt"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/etPhoneNumber"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/message"
+        android:layout_alignEnd="@+id/message"
+        android:selectAllOnFocus="false"
+        android:hint="@string/phone_input"/>
 
 </RelativeLayout>

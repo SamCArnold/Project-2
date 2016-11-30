@@ -31,6 +31,7 @@ public class Main extends AppCompatActivity {
     TextView encryTXT;
     TextView decryTXT;
     EditText message;
+    EditText phoneNumber;
 
     byte[] keyStart;
     byte[] key; // the key we send to the crypt functions
@@ -52,6 +53,7 @@ public class Main extends AppCompatActivity {
         encryTXT = (TextView) findViewById(R.id.encrypt_msg);
         decryTXT = (TextView) findViewById(R.id.decrypt_msg);
         message = (EditText) findViewById(R.id.message);
+        phoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
 
         try {
             keyStart = "this is a key".getBytes();
@@ -81,8 +83,6 @@ public class Main extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-
-        backToList(v);
     }
 
     /**
@@ -137,6 +137,7 @@ public class Main extends AppCompatActivity {
             decryTXT.setText("[DECRYPTED]:\n" + new String(decryptedData) + "\n");
         } else if (v == btSend){
             sendEncryptedSMS(v);
+            backToList(v);
         }
     }
 

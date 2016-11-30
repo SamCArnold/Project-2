@@ -3,8 +3,9 @@
     <string name="password_description">Enter your password below to access your messages.</string>
     <string name="password_title">PASSWORD</string>
     <string name="password_button">ENTER</string>
-    <string name="password">fake_temp</string>
+    <string name="password">fake</string>
     <string name="compose_button">COMPOSE NEW</string>
     <string name="send_button">SEND</string>
     <string name="text_phoneNumber">4079539838</string>
+    <string name="phone_input">Enter recipient\'s phone number</string>
 </resources>
